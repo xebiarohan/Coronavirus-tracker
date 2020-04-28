@@ -34,27 +34,38 @@ const DataTableView = (props) => {
   });
 
   const classes = useStyles();
+
+  const headers = (
+    <TableRow>
+      <StyledTableCell>Country</StyledTableCell>
+      <StyledTableCell>State</StyledTableCell>
+      <StyledTableCell>Active cases</StyledTableCell>
+      <StyledTableCell>Difference From Previous Day</StyledTableCell>
+      <StyledTableCell>New Deaths</StyledTableCell>
+      <StyledTableCell>Total Deaths</StyledTableCell>
+    </TableRow>
+  );
+  
   return (
     <div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
-            <TableRow>
-              <StyledTableCell>Country</StyledTableCell>
-              <StyledTableCell>State</StyledTableCell>
-              <StyledTableCell>Active cases</StyledTableCell>
-              <StyledTableCell>Difference From Previous Day</StyledTableCell>
-            </TableRow>
+              {headers}
           </TableHead>
           <TableBody>
             {props.countryData.map((country, index) => (
               <StyledTableRow key={index}>
-                <StyledTableCell component="th" scope="row">
+                <StyledTableCell>
                   {country.country}
                 </StyledTableCell>
-                <StyledTableCell>{country.state !== "" ? country.state : "-"}</StyledTableCell>
+                <StyledTableCell>
+                  {country.state !== "" ? country.state : "-"}
+                </StyledTableCell>
                 <StyledTableCell>{country.latestTotal}</StyledTableCell>
                 <StyledTableCell>{country.diffFromPreviousDay}</StyledTableCell>
+                <StyledTableCell>{country.newDeaths}</StyledTableCell>
+                <StyledTableCell>{country.totalDeath}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

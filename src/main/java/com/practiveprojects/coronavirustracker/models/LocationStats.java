@@ -5,6 +5,8 @@ public class LocationStats {
     private String country;
     private int latestTotal;
     private int diffFromPreviousDay;
+    private int totalDeath;
+    private int newDeaths;
 
     public String getState() {
         return state;
@@ -38,12 +40,32 @@ public class LocationStats {
         this.diffFromPreviousDay = diffFromPreviousDay;
     }
 
+    public int getTotalDeath() {
+        return totalDeath;
+    }
+
+    public void setTotalDeath(int totalDeath) {
+        this.totalDeath = totalDeath;
+    }
+
+    public int getNewDeaths() {
+        return newDeaths;
+    }
+
+    public void setNewDeaths(int newDeaths) {
+        this.newDeaths = newDeaths;
+    }
+
+
     @Override
     public String toString() {
         return "LocationStats{" +
                 "state='" + state + '\'' +
                 ", country='" + country + '\'' +
                 ", latestTotal=" + latestTotal +
+                ", diffFromPreviousDay=" + diffFromPreviousDay +
+                ", totalDeath=" + totalDeath +
+                ", newDeaths=" + newDeaths +
                 '}';
     }
 }
