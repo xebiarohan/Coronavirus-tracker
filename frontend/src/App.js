@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from 'axios';
-import Country from './Country/Country';
+import DataTableView from "./DataTableview/DataTableView";
+import Country from "./Country/Country";
+
 
 class App extends Component {
 
@@ -20,20 +22,18 @@ class App extends Component {
   }
 
 
+
+
   render() {
-    const countryData = this.state.cases.map( (country,index) => {
-      return <Country key= {index}
-                countryName={country.country} 
-                latestTotal= {country.latestTotal}
-                stateName ={country.state}
-                diffFromPreviousDay = {country.diffFromPreviousDay}/>
-    })
 
     return (
       <div className="App">
         <h2>Corona Virus Tracker Application</h2>
 
-        {countryData}
+        <DataTableView countryData={this.state.cases}/>
+
+
+
       </div>
     );
   }
