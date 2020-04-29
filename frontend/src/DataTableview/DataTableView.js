@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,8 +7,23 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import axios from "axios";
 
 const DataTableView = (props) => {
+  const [countryWiseCount, setCountryWiseCount] = useState({
+    virusData: [],
+  });
+
+  const [sortedField, setSortedField] = useState();
+
+  useEffect(() => {
+    axios.get("/trackerData").then((response) => {
+      setCountryWiseCount({
+        virusData: response.data,
+      });
+    });
+  }, []);
+
   const StyledTableCell = withStyles((theme) => ({
     head: {
       backgroundColor: theme.palette.common.black,
@@ -34,10 +49,33 @@ const DataTableView = (props) => {
   });
 
   const classes = useStyles();
+  React.useMemo(() => {
+    if (sortedField) {
+      let currentData = [...countryWiseCount.virusData];
+      console.log(new Date());
+      currentData = currentData.sort((a, b) => {
+        if (a[sortedField] < b[sortedField]) {
+          return -1;
+        }
+        if (a[sortedField] > b[sortedField]) {
+          return 1;
+        }
+        return 0;
+      });
+      console.log(new Date());
+      setCountryWiseCount({ virusData: currentData });
+    }
+  }, [sortedField]);
 
   const headers = (
     <TableRow>
-      <StyledTableCell>Country</StyledTableCell>
+      <StyledTableCell
+        onClick={() => {
+          setSortedField("country");
+        }}
+      >
+        Country
+      </StyledTableCell>
       <StyledTableCell>State</StyledTableCell>
       <StyledTableCell>Active cases</StyledTableCell>
       <StyledTableCell>Difference From Previous Day</StyledTableCell>
@@ -45,20 +83,16 @@ const DataTableView = (props) => {
       <StyledTableCell>Total Deaths</StyledTableCell>
     </TableRow>
   );
-  
+
   return (
     <div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
-          <TableHead>
-              {headers}
-          </TableHead>
+          <TableHead>{headers}</TableHead>
           <TableBody>
-            {props.countryData.map((country, index) => (
+            {countryWiseCount.virusData.map((country, index) => (
               <StyledTableRow key={index}>
-                <StyledTableCell>
-                  {country.country}
-                </StyledTableCell>
+                <StyledTableCell>{country.country}</StyledTableCell>
                 <StyledTableCell>
                   {country.state !== "" ? country.state : "-"}
                 </StyledTableCell>
