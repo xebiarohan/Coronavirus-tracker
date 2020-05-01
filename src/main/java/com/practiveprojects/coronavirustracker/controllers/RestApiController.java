@@ -28,9 +28,21 @@ public class RestApiController {
                 .sorted(Comparator.comparing(LocationStats::getLatestTotal).reversed())
                 .collect(Collectors.toList());
 
-        int totalCases = allStats.stream().mapToInt(stat -> stat.getLatestTotal()).sum();
+
         int totalNewCases = allStats.stream().mapToInt(stat -> stat.getDiffFromPreviousDay()).sum();
         return new ResponseEntity<>(allStats,HttpStatus.OK);
+    }
+
+    @GetMapping("/activeCases")
+    public ResponseEntity<List<Integer>> getTotalCases() {
+        List<LocationStats> allStats = coronaVirusDataService.getAllStats();
+        allStats = allStats
+                .stream()
+                .sorted(Comparator.comparing(LocationStats::getLatestTotal).reversed())
+                .collect(Collectors.toList());
+        int totalCases = allStats.stream().mapToInt(stat -> stat.getLatestTotal()).sum();
+
+        return new ResponseEntity(totalCases,HttpStatus.OK);
     }
 
 }

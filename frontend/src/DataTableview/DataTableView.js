@@ -8,7 +8,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
-import useSortableData from "./DataSort";
+import useSortableData from "./UseSortableData/UseSortableData";
+
 
 const DataTableView = (props) => {
   const [countryWiseCount, setCountryWiseCount] = useState({
@@ -16,8 +17,6 @@ const DataTableView = (props) => {
   });
 
   const { items, requestSort } = useSortableData(countryWiseCount.virusData);
-
-
 
   useEffect(() => {
     axios.get("/trackerData").then((response) => {
@@ -31,9 +30,11 @@ const DataTableView = (props) => {
     head: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
+      cursor: 'pointer'
     },
     body: {
-      fontSize: 14,
+      fontSize: 14
+     
     },
   }))(TableCell);
 
@@ -55,18 +56,12 @@ const DataTableView = (props) => {
 
   const headers = (
     <TableRow>
-      <StyledTableCell
-        onClick={() => {
-          requestSort("country");
-        }}
-      >
-        Country
-      </StyledTableCell>
-      <StyledTableCell>State</StyledTableCell>
-      <StyledTableCell>Active cases</StyledTableCell>
-      <StyledTableCell>Difference From Previous Day</StyledTableCell>
-      <StyledTableCell>New Deaths</StyledTableCell>
-      <StyledTableCell>Total Deaths</StyledTableCell>
+      <StyledTableCell onClick={() => { requestSort("country"); }}>Country</StyledTableCell>
+      <StyledTableCell onClick={() => { requestSort("state");}}>State</StyledTableCell>
+      <StyledTableCell onClick={() => { requestSort("latestTotal"); }}>Active cases</StyledTableCell>
+      <StyledTableCell onClick={() => { requestSort("diffFromPreviousDay"); }}>Difference From Previous Day</StyledTableCell>
+      <StyledTableCell onClick={() => { requestSort("newDeaths"); }}>New Deaths</StyledTableCell>
+      <StyledTableCell onClick={() => { requestSort("totalDeath"); }}>Total Deaths</StyledTableCell>
     </TableRow>
   );
 
