@@ -10,7 +10,6 @@ import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import useSortableData from "./UseSortableData/UseSortableData";
 
-
 const DataTableView = (props) => {
   const [countryWiseCount, setCountryWiseCount] = useState({
     virusData: [],
@@ -19,7 +18,7 @@ const DataTableView = (props) => {
   const { items, requestSort } = useSortableData(countryWiseCount.virusData);
 
   useEffect(() => {
-    axios.get("/trackerData").then((response) => {
+    axios.get("/virusData/trackerData").then((response) => {
       setCountryWiseCount({
         virusData: response.data,
       });
@@ -30,11 +29,10 @@ const DataTableView = (props) => {
     head: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
-      cursor: 'pointer'
+      cursor: "pointer",
     },
     body: {
-      fontSize: 14
-     
+      fontSize: 14,
     },
   }))(TableCell);
 
@@ -56,12 +54,48 @@ const DataTableView = (props) => {
 
   const headers = (
     <TableRow>
-      <StyledTableCell onClick={() => { requestSort("country"); }}>Country</StyledTableCell>
-      <StyledTableCell onClick={() => { requestSort("state");}}>State</StyledTableCell>
-      <StyledTableCell onClick={() => { requestSort("latestTotal"); }}>Active cases</StyledTableCell>
-      <StyledTableCell onClick={() => { requestSort("diffFromPreviousDay"); }}>Difference From Previous Day</StyledTableCell>
-      <StyledTableCell onClick={() => { requestSort("newDeaths"); }}>New Deaths</StyledTableCell>
-      <StyledTableCell onClick={() => { requestSort("totalDeath"); }}>Total Deaths</StyledTableCell>
+      <StyledTableCell
+        onClick={() => {
+          requestSort("country");
+        }}
+      >
+        Country
+      </StyledTableCell>
+      <StyledTableCell
+        onClick={() => {
+          requestSort("state");
+        }}
+      >
+        State
+      </StyledTableCell>
+      <StyledTableCell
+        onClick={() => {
+          requestSort("latestTotal");
+        }}
+      >
+        Active cases
+      </StyledTableCell>
+      <StyledTableCell
+        onClick={() => {
+          requestSort("diffFromPreviousDay");
+        }}
+      >
+        Difference From Previous Day
+      </StyledTableCell>
+      <StyledTableCell
+        onClick={() => {
+          requestSort("newDeaths");
+        }}
+      >
+        New Deaths
+      </StyledTableCell>
+      <StyledTableCell
+        onClick={() => {
+          requestSort("totalDeath");
+        }}
+      >
+        Total Deaths
+      </StyledTableCell>
     </TableRow>
   );
 
