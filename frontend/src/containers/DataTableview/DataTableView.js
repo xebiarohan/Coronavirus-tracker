@@ -8,7 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
-import useSortableData from "./UseSortableData/UseSortableData";
+import useSortableData from "../../utility/UseSortableData/UseSortableData";
 import Search from "../Search/Search";
 import styles from "./DataTableView.module.scss";
 
