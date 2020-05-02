@@ -26,3 +26,9 @@
   justify-content: space-around;
   padding-bottom: 2rem;
 }
+
+.pageLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}

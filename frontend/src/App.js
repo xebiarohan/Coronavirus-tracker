@@ -3,7 +3,8 @@ import classes from "./App.module.css";
 import DataTableView from "./containers/DataTableview/DataTableView";
 import TotalCases from "./containers/TotalCases/TotalCases";
 import NewCases from "./containers/NewCases/NewCases";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter,Route,Link } from "react-router-dom";
+import DataGraphView from "./containers/DataGraphView/DataGraphView";
 
 class App extends Component {
   state = {
@@ -23,9 +24,15 @@ class App extends Component {
             <div className={classes.latestCount}>
               <NewCases />
             </div>
+            <div className={classes.pageLinks}>
+                <Link to="/">Table View</Link>
+                <Link to="/graph">Graph View</Link>
+            </div>
           </div>
 
-          <DataTableView className="classes.dataTable" />
+        <Route path="/" exact render = {() =><DataTableView className="classes.dataTable" />}></Route>
+          {/* <DataTableView className="classes.dataTable" /> */}
+        <Route path="/graph" exact render = {() => <DataGraphView/>}></Route>  
         </div>
       </BrowserRouter>
     );
