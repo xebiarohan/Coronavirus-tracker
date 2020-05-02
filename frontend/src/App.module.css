@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgb(247, 247, 242);
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+}
+
+.totalCount {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgb(122, 119, 119);
+  width: 60%;
+}
+
+.latestCount {
+  display: flex;
+  flex-direction: row;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  min-width: 35%;
+  justify-content: space-around;
+  align-self: center;
+}
+
+.test {
+  background-color: black;
+}

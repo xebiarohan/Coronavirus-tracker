@@ -1,27 +1,28 @@
 import React, { Component } from "react";
-import "./App.css";
-import axios from 'axios';
+import classes from "./App.module.css";
 import DataTableView from "./DataTableview/DataTableView";
-import Country from "./Country/Country";
 import TotalCases from "./TotalCases/TotalCases";
-
+import NewCases from "./NewCases/NewCases";
 
 class App extends Component {
-
   state = {
-    cases: []
-  }
+    cases: [],
+  };
 
   render() {
-
     return (
-      <div className="App">
+      <div>
         <h2>Corona Virus Tracker Application</h2>
-        <TotalCases/>
-        <DataTableView/>
 
-
-
+        <div className={classes.container}>
+          <div className={classes.totalCount}>
+            <TotalCases />
+          </div>
+          <div className={classes.latestCount}>
+            <NewCases />
+          </div>
+        </div>
+        <DataTableView className="classes.dataTable" />
       </div>
     );
   }

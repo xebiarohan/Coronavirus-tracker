@@ -31,7 +31,7 @@ public class RestApiController {
                 .collect(Collectors.toList());
 
 
-        int totalNewCases = allStats.stream().mapToInt(stat -> stat.getDiffFromPreviousDay()).sum();
+
         return new ResponseEntity<>(allStats,HttpStatus.OK);
     }
 
@@ -45,6 +45,19 @@ public class RestApiController {
         int totalCases = allStats.stream().mapToInt(stat -> stat.getLatestTotal()).sum();
 
         return new ResponseEntity(totalCases,HttpStatus.OK);
+    }
+
+
+    @GetMapping("/newCases")
+    public ResponseEntity<Integer> getNewCases() {
+        List<LocationStats> allStats = coronaVirusDataService.getAllStats();
+        allStats = allStats
+                .stream()
+                .sorted(Comparator.comparing(LocationStats::getLatestTotal).reversed())
+                .collect(Collectors.toList());
+        int totalNewCases = allStats.stream().mapToInt(stat -> stat.getDiffFromPreviousDay()).sum();
+
+        return new ResponseEntity(totalNewCases,HttpStatus.OK);
     }
 
 }

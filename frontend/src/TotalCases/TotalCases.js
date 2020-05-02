@@ -11,7 +11,13 @@ const TotalCases = (props) => {
     });
   }, []);
 
-  return <p> Total Number of cases : {totalCases}</p>;
+  return (
+      <div>
+          <div style= {{fontSize: "3rem",
+                        paddingBottom: "1rem"}}>{totalCases}</div>
+          <div style = {{fontSize: "1.7rem", paddingBottom: "1rem"}}>Total cases reported as of today </div> 
+      </div>
+  )
 };
 
 export default TotalCases;
