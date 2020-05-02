@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import classes from "./App.module.css";
-import DataTableView from "./DataTableview/DataTableView";
-import TotalCases from "./TotalCases/TotalCases";
-import NewCases from "./NewCases/NewCases";
+import DataTableView from "./containers/DataTableview/DataTableView";
+import TotalCases from "./containers/TotalCases/TotalCases";
+import NewCases from "./containers/NewCases/NewCases";
+import Search from "./containers/Search/Search";
 
 class App extends Component {
   state = {
@@ -22,6 +23,7 @@ class App extends Component {
             <NewCases />
           </div>
         </div>
+
         <DataTableView className="classes.dataTable" />
       </div>
     );

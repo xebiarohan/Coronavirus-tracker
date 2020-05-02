@@ -9,11 +9,14 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import useSortableData from "./UseSortableData/UseSortableData";
+import Search from "../Search/Search";
+import styles from "./DataTableView.module.scss";
 
 const DataTableView = (props) => {
   const [countryWiseCount, setCountryWiseCount] = useState({
     virusData: [],
   });
+  const [searchText, setSearchText] = useState(null);
 
   const { items, requestSort } = useSortableData(countryWiseCount.virusData);
 
@@ -99,25 +102,46 @@ const DataTableView = (props) => {
     </TableRow>
   );
 
+  const updateListHandler = (searchText) => {
+    console.log("search text" + searchText);
+    setSearchText(searchText);
+  };
+
+  const tableBody = (
+    <TableBody>
+      {items
+        .filter((x) => {
+          if (searchText !== null && searchText !== "") {
+          
+            return x.country.startsWith(searchText) ? true : false;
+          } else {
+            return true;
+          }
+        })
+        .map((country, index) => (
+          <StyledTableRow key={index}>
+            <StyledTableCell>{country.country}</StyledTableCell>
+            <StyledTableCell>
+              {country.state !== "" ? country.state : "-"}
+            </StyledTableCell>
+            <StyledTableCell>{country.latestTotal}</StyledTableCell>
+            <StyledTableCell>{country.diffFromPreviousDay}</StyledTableCell>
+            <StyledTableCell>{country.newDeaths}</StyledTableCell>
+            <StyledTableCell>{country.totalDeath}</StyledTableCell>
+          </StyledTableRow>
+        ))}
+    </TableBody>
+  );
+
   return (
     <div>
+      <div className={styles.search}>
+        <Search click={(searchText) => updateListHandler(searchText)} />
+      </div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>{headers}</TableHead>
-          <TableBody>
-            {items.map((country, index) => (
-              <StyledTableRow key={index}>
-                <StyledTableCell>{country.country}</StyledTableCell>
-                <StyledTableCell>
-                  {country.state !== "" ? country.state : "-"}
-                </StyledTableCell>
-                <StyledTableCell>{country.latestTotal}</StyledTableCell>
-                <StyledTableCell>{country.diffFromPreviousDay}</StyledTableCell>
-                <StyledTableCell>{country.newDeaths}</StyledTableCell>
-                <StyledTableCell>{country.totalDeath}</StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
+          {tableBody}
         </Table>
       </TableContainer>
     </div>

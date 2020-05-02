@@ -24,9 +24,5 @@
   flex-direction: row;
   min-width: 35%;
   justify-content: space-around;
-  align-self: center;
-}
-
-.test {
-  background-color: black;
+  padding-bottom: 2rem;
 }
