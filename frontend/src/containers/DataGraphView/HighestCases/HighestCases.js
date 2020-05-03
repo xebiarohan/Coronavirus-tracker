@@ -1,5 +1,6 @@
 import React from 'react';
 import CanvasJSReact from "./../../../lib/canvasjs.react";
+var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const HighestCases = (props) => {
@@ -21,6 +22,7 @@ const HighestCases = (props) => {
       ],
     };
   
+    console.log(props.highestCases);
   
     return (
       <div>
@@ -34,4 +36,4 @@ const HighestCases = (props) => {
   };
 
 
-export default HighestCases;
+export default React.memo(HighestCases);
