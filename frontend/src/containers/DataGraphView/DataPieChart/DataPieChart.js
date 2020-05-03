@@ -7,26 +7,28 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 const DataPieChart = (props) => {
   const context = useContext(TotalCasesContext);
   const currentCountryWiseData = context.countryWiseData;
-
-  //   currentCountryWiseData.forEach((country) => {
-  //     country.percentage = country.latestTotal / context.totalCases;
-  //     country.label = country.country;
-  //   });
+  let currentTotal = 0;
   let updatedResult = [];
 
   currentCountryWiseData.forEach((country) => {
     updatedResult.push({
-      y: +(((+country.latestTotal /+context.totalCases)*100).toFixed(2)),
+      y: +(((+country.latestTotal /+context.totalCases)*100).toFixed(0)),
       label: country.country,
     });
   });
+
+  updatedResult = updatedResult.filter(x => x.y > 0);
+
+  
+  updatedResult.forEach(x => currentTotal += x.y);
+  updatedResult.push({y: (100-currentTotal),label: "Others"});
 
   const options = {
     animationEnabled: true,
     exportEnabled: true,
     theme: "light1", // "light1", "dark1", "dark2"
     title: {
-      text: "Pie chart",
+      text: "Percentage per country",
     },
     data: [
       {
