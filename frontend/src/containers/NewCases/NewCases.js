@@ -6,7 +6,6 @@ const NewCases = (props) => {
 
   useEffect(() => {
     axios.get("/virusData/newCases").then((response) => {
-      console.log(response);
       setlatestCases(response.data);
     });
   }, []);

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import HighestCases from "./HighestCases/HighestCases";
+import DataPieChart from "./DataPieChart/DataPieChart";
+import classes from "./DataGraphView.module.scss";
 
 const DataGraphView = (props) => {
   const [countryWiseCount, setCountryWiseCount] = useState({
@@ -8,7 +10,6 @@ const DataGraphView = (props) => {
   });
 
   const [highestCases, setHighestCases] = useState([]);
-  
 
   React.useMemo(() => {
     let dataPoints = [];
@@ -24,15 +25,14 @@ const DataGraphView = (props) => {
           }
         })
         .slice(0, 10);
-      
+
       countriesWithHightestCases.forEach((country) => {
         dataPoints.push({ label: country.country, y: country.latestTotal });
       });
       setHighestCases(dataPoints);
       // options.data[0].dataPoints = dataPoints;
     }
-  },[countryWiseCount.virusData]);
-  
+  }, [countryWiseCount.virusData]);
 
   useEffect(() => {
     axios.get("/virusData/trackerData").then((response) => {
@@ -43,8 +43,14 @@ const DataGraphView = (props) => {
   }, []);
 
   return (
-    <div>
-      <HighestCases highestCases={highestCases}></HighestCases>
+    <div className={classes.graphContainer}>
+      <div className={classes.pieChartContainer}>
+        <DataPieChart></DataPieChart>
+      </div>
+      <div className={classes.barChartContainer}>
+        <HighestCases highestCases={highestCases}></HighestCases>
+      </div>
+      
     </div>
   );
 };
