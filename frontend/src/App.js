@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import DataGraphView from "./containers/DataGraphView/DataGraphView";
 import TotatlCasesContext from "./context/TotalCasesContext";
 import axios from "axios";
+import { Button } from "@material-ui/core";
 
 class App extends Component {
   state = {
@@ -50,8 +51,16 @@ class App extends Component {
                 <NewCases />
               </div>
               <div className={classes.pageLinks}>
-                <Link to="/">Table View</Link>
-                <Link to="/graph">Graph View</Link>
+                <Link to="/" style={{paddingLeft: '1rem'}}>
+                  <Button size="small" variant="contained" color="primary">
+                    Table view
+                  </Button>
+                </Link>
+                <Link to="/graph" style={{paddingLeft: '1rem'}}>
+                  <Button size="small" variant="contained" color="primary">
+                    Graph view
+                  </Button>
+                </Link>
               </div>
             </div>
 
