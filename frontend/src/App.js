@@ -8,6 +8,8 @@ import DataGraphView from "./containers/DataGraphView/DataGraphView";
 import TotatlCasesContext from "./context/TotalCasesContext";
 import axios from "axios";
 import { Button } from "@material-ui/core";
+import GithubLogo from './assets/githhub_logo.png';
+import linkedIn from './assets/linkedIn.png';
 
 class App extends Component {
   state = {
@@ -51,12 +53,12 @@ class App extends Component {
                 <NewCases />
               </div>
               <div className={classes.pageLinks}>
-                <Link to="/" style={{paddingLeft: '1rem'}}>
+                <Link to="/" style={{ paddingLeft: "1rem" }}>
                   <Button size="small" variant="contained" color="primary">
                     Table view
                   </Button>
                 </Link>
-                <Link to="/graph" style={{paddingLeft: '1rem'}}>
+                <Link to="/graph" style={{ paddingLeft: "1rem" }}>
                   <Button size="small" variant="contained" color="primary">
                     Graph view
                   </Button>
@@ -69,8 +71,31 @@ class App extends Component {
               exact
               render={() => <DataTableView className="classes.dataTable" />}
             ></Route>
-            {/* <DataTableView className="classes.dataTable" /> */}
             <Route path="/graph" exact render={() => <DataGraphView />}></Route>
+            <div className={classes.footerLinks}>
+              <a
+                target="_blank"
+                href="https://github.com/xebiarohan/Coronavirus-tracker"
+              >
+                <img
+                  alt="Github"
+                  src={GithubLogo}
+                  width="40"
+                  height="80"
+                />
+              </a>
+              <a className={classes.linkedInLogo}
+                target="_blank"
+                href="https://www.linkedin.com/in/rohan-aggarwal-585707145/"
+              >
+                <img
+                  alt="LinkedIn"
+                  src={linkedIn}
+                  width="40"
+                  height="55"
+                />
+              </a>
+            </div>
           </div>
         </BrowserRouter>
       </TotatlCasesContext.Provider>

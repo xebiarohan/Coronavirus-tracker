@@ -36,3 +36,14 @@
 .links{
   padding-left: 2rem;
 }
+
+.footerLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.linkedInLogo {
+  padding-top: 0.8rem;
+  padding-left: 0.4rem;
+}
