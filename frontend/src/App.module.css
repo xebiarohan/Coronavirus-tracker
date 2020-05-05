@@ -33,7 +33,7 @@
   justify-content: flex-start;
 }
 
-.links{
+.links {
   padding-left: 2rem;
 }
 
@@ -46,4 +46,40 @@
 .linkedInLogo {
   padding-top: 0.8rem;
   padding-left: 0.4rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.nameContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  min-width: 70%;
+}
+
+.userContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  min-width: 29%;
+}
+
+.imageContainer {
+  border-radius: 50%;
+}
+
+.userNameContainer {
+  padding-top: 1rem;
+  padding-right: 1rem;
+}
+
+.googleLoginContainer {
+  display: flex;
+  max-height: 2.8rem;
+  justify-content: flex-end;
+  min-width: 29%;
+  padding-top: 0.8rem;
 }
