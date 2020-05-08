@@ -4,6 +4,7 @@ package com.practiveprojects.coronavirustracker.controllers;
 import com.practiveprojects.coronavirustracker.models.LocationStats;
 import com.practiveprojects.coronavirustracker.services.CoronaVirusDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/virusData")
 public class RestApiController {
+
 
     @Autowired
     private CoronaVirusDataService coronaVirusDataService;
